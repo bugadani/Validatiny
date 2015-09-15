@@ -1,0 +1,20 @@
+{
+  "name": "bugadani/validatiny",
+  "description": "A simple object validator library",
+  "minimum-stability": "dev",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Dániel Buga",
+      "email": "bugadani@gmail.com"
+    }
+  ],
+  "require": {
+    "bugadani/annotiny": "dev-master"
+  },
+  "autoload": {
+    "psr-4": {
+      "Validatiny\\": "src/"
+    }
+  }
+}
