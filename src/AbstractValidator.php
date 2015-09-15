@@ -2,6 +2,9 @@
 
 namespace Validatiny;
 
+/**
+ * A base class for all validators and Rule classes
+ */
 abstract class AbstractValidator
 {
     /**
