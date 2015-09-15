@@ -20,7 +20,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultStringValidator()
     {
-        $validator = new String();
+        $validator = new StringRule();
 
         $this->assertTrue($validator->validate($this->validator, "asd"));
         $this->assertFalse($validator->validate($this->validator, 1));
@@ -28,7 +28,7 @@ class StringTest extends \PHPUnit_Framework_TestCase
 
     public function testStringLengthValidator()
     {
-        $validator = new String(2, 3);
+        $validator = new StringRule(2, 3);
 
         $this->assertFalse($validator->validate($this->validator, "a"));
         $this->assertTrue($validator->validate($this->validator, "as"));

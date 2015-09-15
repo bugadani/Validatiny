@@ -8,7 +8,7 @@ use Validatiny\Validator;
 class TestClass
 {
     /**
-     * @Validatiny\Rules\String(minLength: 5, maxLength:10)
+     * @Validatiny\Rules\StringRule(minLength: 5, maxLength:10)
      */
     public $prop;
 

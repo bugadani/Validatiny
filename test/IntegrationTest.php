@@ -8,7 +8,7 @@ use Validatiny\Rules as Validator;
 class TestClass
 {
     /**
-     * @Validator\String(minLength: 5, maxLength:10)
+     * @Validator\StringRule(minLength: 5, maxLength:10)
      */
     public $prop = 'asfgg';
 

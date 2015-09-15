@@ -8,7 +8,7 @@ use Validatiny\Validator;
 class UnionTestClass {
 
     /**
-     * @Union({@String(), @Number(min: 2, max: 3)})
+     * @Union({@StringRule(), @Number(min: 2, max: 3)})
      */
     public $value;
 

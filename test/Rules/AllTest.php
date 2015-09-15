@@ -9,7 +9,7 @@ class AllTestClass {
 
     /**
      * @All({
-     *  @String(minLength: 2, maxLength: 5),
+     *  @StringRule(minLength: 2, maxLength: 5),
      *  @Enum({"foo", "foobar"})
      * })
      */

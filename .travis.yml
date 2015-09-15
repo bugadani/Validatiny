@@ -9,11 +9,6 @@ php:
   - hhvm
   - hhvm-nightly
 
-matrix:
-    allow_failures:
-        - php: nightly
-        - php: hhvm-nightly
-
 before_script:
   - composer --prefer-source --dev install
 

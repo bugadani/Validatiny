@@ -11,7 +11,7 @@ use Validatiny\Validator;
  * @Attribute('minLength', type: 'int')
  * @Attribute('maxLength', type: 'int')
  */
-class String extends Rule
+class StringRule extends Rule
 {
     /**
      * @var int
