@@ -29,11 +29,13 @@ class MethodValidator extends AbstractValidator
             );
         }
         $value = $object->{$this->method}();
-        $valid = true;
-        foreach ($this->rules as $rule) {
-            $valid = $valid && $rule->validate($validator, $value);
-        }
 
-        return $valid;
+        return array_reduce(
+            $this->rules,
+            function ($carry, Rule $rule) use ($validator, $value) {
+                return $carry && $rule->validate($validator, $value);
+            },
+            true
+        );
     }
 }

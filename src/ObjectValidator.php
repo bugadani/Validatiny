@@ -45,11 +45,13 @@ class ObjectValidator extends AbstractValidator
     public function validate(Validator $validator, $object)
     {
         $valid = true;
-        foreach ($this->propertyRules as $property => $propertyvalidator) {
-            $valid = $valid && $propertyvalidator->validate($validator, $object);
-        }
-        foreach ($this->methodRules as $method => $methodvalidator) {
-            $valid = $valid && $methodvalidator->validate($validator, $object);
+
+        $iterator = new \AppendIterator();
+        $iterator->append(new \ArrayIterator($this->propertyRules));
+        $iterator->append(new \ArrayIterator($this->methodRules));
+
+        foreach ($iterator as $rule) {
+            $valid = $valid && $rule->validate($validator, $object);
         }
 
         return $valid;

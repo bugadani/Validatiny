@@ -33,11 +33,13 @@ class PropertyValidator extends AbstractValidator
             throw new \InvalidArgumentException("\$object does not have a public property called {$this->property}");
         }
         $value = $object->{$this->property};
-        $valid = true;
-        foreach ($this->rules as $rule) {
-            $valid = $valid && $rule->validate($validator, $value);
-        }
 
-        return $valid;
+        return array_reduce(
+            $this->rules,
+            function ($carry, Rule $rule) use ($validator, $value) {
+                return $carry && $rule->validate($validator, $value);
+            },
+            true
+        );
     }
 }
