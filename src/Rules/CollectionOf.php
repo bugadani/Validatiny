@@ -9,7 +9,7 @@ use Validatiny\Validator;
  * @Annotation
  * @Target({'method', 'property', 'annotation'})
  * @DefaultAttribute rules
- * @Attribute('rules', type: { 'mixed' }, required: true)
+ * @Attribute('rules', type: 'mixed', required: true)
  */
 class CollectionOf extends Rule
 {
