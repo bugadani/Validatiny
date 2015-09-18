@@ -9,13 +9,18 @@ Validatiny is licensed under the MIT license.
 Rules
 ========
 Validatiny uses subclasses of Validatiny\Rule to validate objects. The current subclasses are:
- * String - validates a string with optional length parameters
- * Pattern - validates a regexp pattern
- * Number - validates a numeric value with optional range parameters
+ * All - validates against a list of Rules where all Rules must apply
+ * Boolean - accepts only true or false
+ * Callable - accepts callable values
+ * Callback - calls a function or static method to validate the value
+ * CollectionOf - validates a collection of elements against a single rule (e.g. validates is something is an array of numbers)
  * Enum - validates against a list of values
+ * Number - validates a numeric value with optional range parameters
  * Object - checks the object type and optionally validates the object as well
+ * Optional - accepts null or validates using an inner rule
+ * Pattern - validates a regexp pattern
+ * String - validates a string with optional length parameters
  * Union - validates against a list of Rules where at least one of the Rules must apply, useful for collections or optional rules
- * All - validates agains a list of Rules where all Rules must apply
  * more to come...
 
 Validatiny can apply the Rules on public properties and getter methods. Any number of Rules may be set and all of them
