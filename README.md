@@ -27,4 +27,15 @@ Validatiny can apply the Rules on public properties and getter methods. Any numb
  must be valid in order for the property and/or method to be considered valid. An object is considered valid if all of
  its properties and methods are valid.
 
+Validation scenarios
+========
+Rules can be added to specific validation scenarios. This enables the user to specify multiple sets of rules on
+a single object.
+
+To specify which rule should belong to which scenario, use the `scenario: 'scenarioName'` attribute on the rule
+annotation, or call `$rule->setScenario()`. Both of these accept a single name or an array of scenario names.
+
+By default, Validatiny validates all rules on an object. To override this behaviour, pass the name of the validation
+scenario as the second parameter for `Validator::validate`.
+
 To be continued...
