@@ -14,12 +14,14 @@ class CallableRule extends Rule
 
     /**
      * @param Validator $validator
-     * @param           $value
+     * @param           $object
+     *
+     * @param           $forScenario
      *
      * @return bool
      */
-    public function validate(Validator $validator, $value)
+    public function validate(Validator $validator, $object, $forScenario)
     {
-        return is_callable($value);
+        return is_callable($object);
     }
 }

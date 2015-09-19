@@ -22,7 +22,12 @@ class CallableRuleTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new CallableRule('is_string');
 
-        $this->assertTrue($validator->validate($this->validator, function(){}));
-        $this->assertFalse($validator->validate($this->validator, 'foobar'));
+        $this->assertTrue($validator->validate(
+            $this->validator,
+            function () {
+            },
+            Validator::SCENARIO_ALL
+        ));
+        $this->assertFalse($validator->validate($this->validator, 'foobar', Validator::SCENARIO_ALL));
     }
 }

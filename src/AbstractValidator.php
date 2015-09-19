@@ -8,10 +8,11 @@ namespace Validatiny;
 abstract class AbstractValidator
 {
     /**
-     * @param Validator $validator
-     * @param           $object
+     * @param Validator       $validator
+     * @param                 $object
+     * @param string|string[] $forScenario
      *
      * @return bool
      */
-    public abstract function validate(Validator $validator, $object);
+    public abstract function validate(Validator $validator, $object, $forScenario);
 }

@@ -22,9 +22,9 @@ class BooleanRuleTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new BooleanRule();
 
-        $this->assertTrue($validator->validate($this->validator, false));
-        $this->assertTrue($validator->validate($this->validator, true));
-        $this->assertFalse($validator->validate($this->validator, 1));
-        $this->assertFalse($validator->validate($this->validator, null));
+        $this->assertTrue($validator->validate($this->validator, false, Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, true, Validator::SCENARIO_ALL));
+        $this->assertFalse($validator->validate($this->validator, 1, Validator::SCENARIO_ALL));
+        $this->assertFalse($validator->validate($this->validator, null, Validator::SCENARIO_ALL));
     }
 }

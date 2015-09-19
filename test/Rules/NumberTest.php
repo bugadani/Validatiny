@@ -22,18 +22,18 @@ class NumberTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Number();
 
-        $this->assertFalse($validator->validate($this->validator, "asd"));
-        $this->assertTrue($validator->validate($this->validator, 1));
+        $this->assertFalse($validator->validate($this->validator, "asd", Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, 1, Validator::SCENARIO_ALL));
     }
 
     public function testNumberRangeValidator()
     {
         $validator = new Number(2, 3);
 
-        $this->assertFalse($validator->validate($this->validator, 1));
-        $this->assertTrue($validator->validate($this->validator, 2));
-        $this->assertTrue($validator->validate($this->validator, 3));
-        $this->assertFalse($validator->validate($this->validator, 3.2));
-        $this->assertFalse($validator->validate($this->validator, 4));
+        $this->assertFalse($validator->validate($this->validator, 1, Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, 2, Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, 3, Validator::SCENARIO_ALL));
+        $this->assertFalse($validator->validate($this->validator, 3.2, Validator::SCENARIO_ALL));
+        $this->assertFalse($validator->validate($this->validator, 4, Validator::SCENARIO_ALL));
     }
 }

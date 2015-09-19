@@ -25,14 +25,16 @@ class Callback extends Rule
 
     /**
      * @param Validator $validator
-     * @param           $value
+     * @param           $object
+     *
+     * @param           $forScenario
      *
      * @return bool
      */
-    public function validate(Validator $validator, $value)
+    public function validate(Validator $validator, $object, $forScenario)
     {
         $callback = $this->callback;
 
-        return $callback($value);
+        return $callback($object);
     }
 }

@@ -37,7 +37,7 @@ class AllTest extends \PHPUnit_Framework_TestCase
         $this->validator = new Validator($reader);
     }
 
-    public function testUnionValidator()
+    public function testAllValidator()
     {
         $this->assertFalse($this->validator->validate(new AllTestClass("baz"))); //not in enum
         $this->assertFalse($this->validator->validate(new AllTestClass("foobar")));//wrong length

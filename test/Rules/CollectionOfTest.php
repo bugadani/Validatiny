@@ -25,9 +25,9 @@ class CollectionOfTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new CollectionOf(new Number());
 
-        $this->assertFalse($validator->validate($this->validator, "a"));
-        $this->assertFalse($validator->validate($this->validator, 1));
-        $this->assertFalse($validator->validate($this->validator, ["a", "b", "c"]));
-        $this->assertTrue($validator->validate($this->validator, [1, 2, 3]));
+        $this->assertFalse($validator->validate($this->validator, "a", Validator::SCENARIO_ALL));
+        $this->assertFalse($validator->validate($this->validator, 1, Validator::SCENARIO_ALL));
+        $this->assertFalse($validator->validate($this->validator, ["a", "b", "c"], Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, [1, 2, 3], Validator::SCENARIO_ALL));
     }
 }

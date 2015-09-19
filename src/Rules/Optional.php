@@ -26,16 +26,18 @@ class Optional extends Rule
 
     /**
      * @param Validator $validator
-     * @param           $value
+     * @param           $object
+     *
+     * @param           $forScenario
      *
      * @return bool
      */
-    public function validate(Validator $validator, $value)
+    public function validate(Validator $validator, $object, $forScenario)
     {
-        if ($value === null) {
+        if ($object === null) {
             return true;
         }
 
-        return $this->rule->validate($validator, $value);
+        return $this->rule->validate($validator, $object, $forScenario);
     }
 }

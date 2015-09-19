@@ -25,14 +25,16 @@ class All extends Rule
 
     /**
      * @param Validator $validator
-     * @param mixed     $value
+     * @param mixed     $object
+     *
+     * @param           $forScenario
      *
      * @return bool
      */
-    public function validate(Validator $validator, $value)
+    public function validate(Validator $validator, $object, $forScenario)
     {
         foreach ($this->rules as $rule) {
-            if (!$rule->validate($validator, $value)) {
+            if (!$rule->validate($validator, $object, $forScenario)) {
                 return false;
             }
         }

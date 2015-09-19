@@ -22,8 +22,8 @@ class EnumTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Enum(['a', 'b', 2, 3]);
 
-        $this->assertTrue($validator->validate($this->validator, 'a'));
-        $this->assertFalse($validator->validate($this->validator, 1));
-        $this->assertTrue($validator->validate($this->validator, 2));
+        $this->assertTrue($validator->validate($this->validator, 'a', Validator::SCENARIO_ALL));
+        $this->assertFalse($validator->validate($this->validator, 1, Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, 2, Validator::SCENARIO_ALL));
     }
 }

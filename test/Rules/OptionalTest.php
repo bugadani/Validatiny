@@ -22,8 +22,8 @@ class OptionalTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Optional(new StringRule());
 
-        $this->assertTrue($validator->validate($this->validator, null));
-        $this->assertTrue($validator->validate($this->validator, "asd"));
-        $this->assertFalse($validator->validate($this->validator, 1));
+        $this->assertTrue($validator->validate($this->validator, null, Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, "asd", Validator::SCENARIO_ALL));
+        $this->assertFalse($validator->validate($this->validator, 1, Validator::SCENARIO_ALL));
     }
 }

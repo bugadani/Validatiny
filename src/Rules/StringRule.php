@@ -31,17 +31,19 @@ class StringRule extends Rule
 
     /**
      * @param Validator $validator
-     * @param           $value
+     * @param           $object
+     *
+     * @param           $forScenario
      *
      * @return bool
      */
-    public function validate(Validator $validator, $value)
+    public function validate(Validator $validator, $object, $forScenario)
     {
-        if (!is_string($value)) {
+        if (!is_string($object)) {
             return false;
         }
 
-        $length = strlen($value);
+        $length = strlen($object);
         if ($this->minLength !== null) {
             if ($length < $this->minLength) {
                 return false;

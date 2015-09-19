@@ -2,32 +2,24 @@
 
 namespace Validatiny;
 
-class PropertyValidator extends AbstractValidator
+class PropertyValidator extends AbstractRuleValidator
 {
     private $property;
-
-    /**
-     * @var Rule[]
-     */
-    private $rules = [];
 
     public function __construct($property)
     {
         $this->property = $property;
     }
 
-    public function addRule(Rule $rule)
-    {
-        $this->rules[] = $rule;
-    }
-
     /**
      * @param Validator $validator
      * @param           $object
      *
+     * @param           $forScenario
+     *
      * @return bool
      */
-    public function validate(Validator $validator, $object)
+    public function validate(Validator $validator, $object, $forScenario)
     {
         if (!property_exists($object, $this->property)) {
             throw new \InvalidArgumentException("\$object does not have a public property called {$this->property}");
@@ -35,9 +27,9 @@ class PropertyValidator extends AbstractValidator
         $value = $object->{$this->property};
 
         return array_reduce(
-            $this->rules,
-            function ($carry, Rule $rule) use ($validator, $value) {
-                return $carry && $rule->validate($validator, $value);
+            $this->getApplicableRules($forScenario),
+            function ($carry, Rule $rule) use ($validator, $value, $forScenario) {
+                return $carry && $rule->validate($validator, $value, $forScenario);
             },
             true
         );

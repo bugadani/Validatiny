@@ -22,7 +22,7 @@ class CallbackTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Callback('is_string');
 
-        $this->assertTrue($validator->validate($this->validator, "asd"));
-        $this->assertFalse($validator->validate($this->validator, 1));
+        $this->assertTrue($validator->validate($this->validator, "asd", Validator::SCENARIO_ALL));
+        $this->assertFalse($validator->validate($this->validator, 1, Validator::SCENARIO_ALL));
     }
 }

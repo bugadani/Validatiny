@@ -34,9 +34,11 @@ class Object extends Rule
      * @param Validator $validator
      * @param           $object
      *
+     * @param           $forScenario
+     *
      * @return bool
      */
-    public function validate(Validator $validator, $object)
+    public function validate(Validator $validator, $object, $forScenario)
     {
         if (!$object instanceof $this->className) {
             return false;
