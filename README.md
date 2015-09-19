@@ -15,6 +15,7 @@ Validatiny uses subclasses of Validatiny\Rule to validate objects. The current s
  * Callback - calls a function or static method to validate the value
  * CollectionOf - validates a collection of elements against a single rule (e.g. validates is something is an array of numbers)
  * Enum - validates against a list of values
+ * Not - negates the result of the inner validator
  * Number - validates a numeric value with optional range parameters
  * Object - checks the object type and optionally validates the object as well
  * Optional - accepts null or validates using an inner rule
