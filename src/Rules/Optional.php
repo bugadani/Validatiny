@@ -9,7 +9,7 @@ use Validatiny\Validator;
  * @Annotation
  * @Target({'method', 'property', 'annotation'})
  * @DefaultAttribute rule
- * @Attribute('rule', type: 'mixed')
+ * @Attribute('rule', type: 'Validatiny\Rule')
  */
 class Optional extends Rule
 {
