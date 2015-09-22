@@ -31,17 +31,17 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
         $this->validator = new Validator($reader);
     }
 
-    public function testObjectTypeValidator()
+    public function testObjectTypeValidatorWithoutValidatingTheObject()
     {
-        $validator = new Object(__NAMESPACE__ . '\TestClass');
+        $validator = new Object(__NAMESPACE__ . '\TestClass', false);
 
         $this->assertFalse($validator->validate($this->validator, "asd"));
         $this->assertTrue($validator->validate($this->validator, new TestClass()));
     }
 
-    public function testObjectValidatorValidator()
+    public function testObjectValidator()
     {
-        $validator = new Object(__NAMESPACE__ . '\TestClass', true);
+        $validator = new Object(__NAMESPACE__ . '\TestClass');
 
         $this->assertFalse($validator->validate($this->validator, new TestClass()));
         $this->assertTrue($validator->validate($this->validator, new TestClass('abcde')));

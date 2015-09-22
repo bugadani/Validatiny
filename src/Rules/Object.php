@@ -24,7 +24,7 @@ class Object extends Rule
      */
     private $validate;
 
-    public function __construct($className, $validate = false)
+    public function __construct($className, $validate = true)
     {
         $this->className = $className;
         $this->validate  = $validate;
