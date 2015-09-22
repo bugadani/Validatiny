@@ -23,8 +23,8 @@ class Pattern extends Rule
         $this->pattern = $pattern;
     }
 
-    public function validate(Validator $validator, $value)
+    public function validate(Validator $validator, $object, $forScenario)
     {
-        return preg_match($this->pattern, (string)$value) === 1;
+        return preg_match($this->pattern, (string)$object) === 1;
     }
 }

@@ -9,7 +9,7 @@ use Validatiny\Validator;
  * @Annotation
  * @Target({'method', 'property', 'annotation'})
  * @DefaultAttribute rule
- * @Attribute('rule', type: 'mixed', required: true)
+ * @Attribute('rule', type: 'Validatiny\Rule', required: true)
  */
 class CollectionOf extends Rule
 {
@@ -25,17 +25,19 @@ class CollectionOf extends Rule
 
     /**
      * @param Validator $validator
-     * @param mixed     $value
+     * @param mixed     $object
+     *
+     * @param           $forScenario
      *
      * @return bool
      */
-    public function validate(Validator $validator, $value)
+    public function validate(Validator $validator, $object, $forScenario)
     {
-        if(!is_array($value) && !$value instanceof \Traversable) {
+        if(!is_array($object) && !$object instanceof \Traversable) {
             return false;
         }
-        foreach ($value as $v) {
-            if (!$this->rule->validate($validator, $v)) {
+        foreach ($object as $v) {
+            if (!$this->rule->validate($validator, $v, $forScenario)) {
                 return false;
             }
         }

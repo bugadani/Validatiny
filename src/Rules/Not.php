@@ -11,7 +11,7 @@ use Validatiny\Validator;
  * @DefaultAttribute rule
  * @Attribute('rule', type: 'Validatiny\Rule')
  */
-class Optional extends Rule
+class Not extends Rule
 {
 
     /**
@@ -34,10 +34,6 @@ class Optional extends Rule
      */
     public function validate(Validator $validator, $object, $forScenario)
     {
-        if ($object === null) {
-            return true;
-        }
-
-        return $this->rule->validate($validator, $object, $forScenario);
+        return !$this->rule->validate($validator, $object, $forScenario);
     }
 }

@@ -35,15 +35,15 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Object(__NAMESPACE__ . '\TestClass', false);
 
-        $this->assertFalse($validator->validate($this->validator, "asd"));
-        $this->assertTrue($validator->validate($this->validator, new TestClass()));
+        $this->assertFalse($validator->validate($this->validator, "asd", Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, new TestClass(), Validator::SCENARIO_ALL));
     }
 
     public function testObjectValidator()
     {
         $validator = new Object(__NAMESPACE__ . '\TestClass');
 
-        $this->assertFalse($validator->validate($this->validator, new TestClass()));
-        $this->assertTrue($validator->validate($this->validator, new TestClass('abcde')));
+        $this->assertFalse($validator->validate($this->validator, new TestClass(), Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, new TestClass('abcde'), Validator::SCENARIO_ALL));
     }
 }

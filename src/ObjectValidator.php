@@ -39,10 +39,11 @@ class ObjectValidator extends AbstractValidator
     /**
      * @param Validator $validator
      * @param           $object
+     * @param           $forScenario
      *
      * @return bool
      */
-    public function validate(Validator $validator, $object)
+    public function validate(Validator $validator, $object, $forScenario)
     {
         $valid = true;
 
@@ -50,8 +51,9 @@ class ObjectValidator extends AbstractValidator
         $iterator->append(new \ArrayIterator($this->propertyRules));
         $iterator->append(new \ArrayIterator($this->methodRules));
 
+        /** @var AbstractRuleValidator $rule */
         foreach ($iterator as $rule) {
-            $valid = $valid && $rule->validate($validator, $object);
+            $valid = $valid && $rule->validate($validator, $object, $forScenario);
         }
 
         return $valid;

@@ -5,7 +5,7 @@ namespace Validatiny\Rules;
 use Validatiny\Readers\AnnotationReader;
 use Validatiny\Validator;
 
-class OptionalTest extends \PHPUnit_Framework_TestCase
+class NotTest extends \PHPUnit_Framework_TestCase
 {
     private $validator;
 
@@ -18,12 +18,12 @@ class OptionalTest extends \PHPUnit_Framework_TestCase
         $this->validator = new Validator($reader);
     }
 
-    public function testOptionalValidator()
+    public function testNotValidator()
     {
-        $validator = new Optional(new StringRule());
+        $validator = new Not(new StringRule());
 
         $this->assertTrue($validator->validate($this->validator, null, Validator::SCENARIO_ALL));
-        $this->assertTrue($validator->validate($this->validator, "asd", Validator::SCENARIO_ALL));
-        $this->assertFalse($validator->validate($this->validator, 1, Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, 1, Validator::SCENARIO_ALL));
+        $this->assertFalse($validator->validate($this->validator, "asd", Validator::SCENARIO_ALL));
     }
 }

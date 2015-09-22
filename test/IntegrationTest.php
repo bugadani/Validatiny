@@ -14,6 +14,7 @@ class TestClass
 
     /**
      * @Validator\Number(min: 10, max: 15)
+     * @Validator\Number(min: 10, max: 10, scenario: 'exact')
      */
     public function method()
     {
@@ -28,6 +29,8 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
         $reader    = new AnnotationReader(new \Annotiny\AnnotationReader());
         $validator = new \Validatiny\Validator($reader);
 
-        $this->assertTrue($validator->validate(new TestClass()));
+        $testClass = new TestClass();
+        $this->assertTrue($validator->validate($testClass));
+        $this->assertFalse($validator->validate($testClass, 'exact'));
     }
 }

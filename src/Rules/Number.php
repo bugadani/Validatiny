@@ -31,23 +31,25 @@ class Number extends Rule
 
     /**
      * @param Validator $validator
-     * @param           $value
+     * @param           $object
+     *
+     * @param           $forScenario
      *
      * @return bool
      */
-    public function validate(Validator $validator, $value)
+    public function validate(Validator $validator, $object, $forScenario)
     {
-        if (!is_numeric($value)) {
+        if (!is_numeric($object)) {
             return false;
         }
 
         if ($this->min !== null) {
-            if ($value < $this->min) {
+            if ($object < $this->min) {
                 return false;
             }
         }
         if ($this->max !== null) {
-            if ($value > $this->max) {
+            if ($object > $this->max) {
                 return false;
             }
         }

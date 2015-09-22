@@ -27,12 +27,14 @@ class Enum extends Rule
 
     /**
      * @param Validator $validator
-     * @param mixed     $value
+     * @param mixed     $object
+     *
+     * @param           $forScenario
      *
      * @return bool
      */
-    public function validate(Validator $validator, $value)
+    public function validate(Validator $validator, $object, $forScenario)
     {
-        return in_array($value, $this->elements);
+        return in_array($object, $this->elements);
     }
 }
