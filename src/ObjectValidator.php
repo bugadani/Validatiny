@@ -2,7 +2,7 @@
 
 namespace Validatiny;
 
-class ObjectValidator extends AbstractValidator
+class ObjectValidator extends AbstractRuleValidator
 {
     /**
      * @var PropertyValidator[]
@@ -48,6 +48,7 @@ class ObjectValidator extends AbstractValidator
         $valid = true;
 
         $iterator = new \AppendIterator();
+        $iterator->append(new \ArrayIterator($this->getApplicableRules($forScenario)));
         $iterator->append(new \ArrayIterator($this->propertyRules));
         $iterator->append(new \ArrayIterator($this->methodRules));
 
