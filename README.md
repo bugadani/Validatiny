@@ -12,7 +12,7 @@ Validatiny uses subclasses of Validatiny\Rule to validate objects. The current s
  * All - validates against a list of Rules where all Rules must apply
  * Boolean - accepts only true or false
  * Callable - accepts callable values
- * Callback - calls a function or static method to validate the value
+ * Callback - calls a function or static method to validate the value.
  * CollectionOf - validates a collection of elements against a single rule (e.g. validates is something is an array of numbers)
  * Enum - validates against a list of values
  * Not - negates the result of the inner validator
@@ -34,6 +34,8 @@ The following Rules can also be applied to objects, as well:
  * Not
  * Optional
  * Union
+
+Note: generic validation rules can be applied as PHP code using the Callback Rule on the validated class.
 
 Validation scenarios
 ========
