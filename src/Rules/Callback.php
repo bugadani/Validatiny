@@ -7,7 +7,8 @@ use Validatiny\Validator;
 
 /**
  * @Annotation
- * @Target({'method', 'property', 'annotation'})
+ * @Target({'method', 'property', 'annotation', 'class'})
+ * @DefaultAttribute callback
  * @Attribute('callback', type: 'callable')
  */
 class Callback extends Rule
@@ -33,8 +34,6 @@ class Callback extends Rule
      */
     public function validate(Validator $validator, $object, $forScenario)
     {
-        $callback = $this->callback;
-
-        return $callback($object);
+        return call_user_func($this->callback, $object);
     }
 }

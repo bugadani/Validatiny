@@ -28,6 +28,15 @@ class AnnotationReader extends RuleReader
     {
         $validator = new ObjectValidator();
 
+        $classComment = $this->annotationReader->readClass($object);
+        foreach ($classComment->getAnnotations() as $class => $annotations) {
+            foreach ($annotations as $annotation) {
+                if ($annotation instanceof Rule) {
+                    $validator->addRule($annotation);
+                }
+            }
+        }
+
         $methods = $this->annotationReader->readMethods($object);
         foreach ($methods as $methodName => $comment) {
             /** @var Comment $comment */
