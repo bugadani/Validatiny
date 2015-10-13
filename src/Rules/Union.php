@@ -9,7 +9,7 @@ use Validatiny\Validator;
  * An union of validation rules, one of them must be valid for the rule to be valid
  *
  * @Annotation
- * @Target({'method', 'property', 'annotation'})
+ * @Target({'method', 'property', 'annotation', 'class'})
  * @DefaultAttribute rules
  * @Attribute('rules', type: { 'Validatiny\Rule' }, required: true)
  */

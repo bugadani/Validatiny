@@ -7,7 +7,7 @@ use Validatiny\Validator;
 
 /**
  * @Annotation
- * @Target({'method', 'property', 'annotation'})
+ * @Target({'method', 'property', 'annotation', 'class'})
  * @DefaultAttribute rule
  * @Attribute('rule', type: 'Validatiny\Rule')
  */

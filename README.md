@@ -28,6 +28,13 @@ Validatiny can apply the Rules on public properties and getter methods. Any numb
  must be valid in order for the property and/or method to be considered valid. An object is considered valid if all of
  its properties and methods are valid.
 
+The following Rules can also be applied to objects, as well:
+ * All
+ * Callback
+ * Not
+ * Optional
+ * Union
+
 Validation scenarios
 ========
 Rules can be added to specific validation scenarios. This enables the user to specify multiple sets of rules on
