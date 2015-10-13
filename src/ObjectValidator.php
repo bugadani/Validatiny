@@ -48,9 +48,9 @@ class ObjectValidator extends AbstractRuleValidator
         $valid = true;
 
         $iterator = new \AppendIterator();
-        $iterator->append(new \ArrayIterator($this->getApplicableRules($forScenario)));
         $iterator->append(new \ArrayIterator($this->propertyRules));
         $iterator->append(new \ArrayIterator($this->methodRules));
+        $iterator->append(new \ArrayIterator($this->getApplicableRules($forScenario)));
 
         /** @var AbstractRuleValidator $rule */
         foreach ($iterator as $rule) {

@@ -42,8 +42,10 @@ class IntegrationTest extends \PHPUnit_Framework_TestCase
 
         $testClass = new TestClass();
         $this->assertTrue($validator->validate($testClass));
-        $this->assertFalse($validator->validate($testClass, 'exact'));
-
         $this->assertTrue($testClass->validatorCalled);
+
+        $testClass = new TestClass();
+        $this->assertFalse($validator->validate($testClass, 'exact'));
+        $this->assertFalse($testClass->validatorCalled);
     }
 }
