@@ -20,26 +20,25 @@ class StructureTest extends \PHPUnit_Framework_TestCase
 
     public function testArrayValidator()
     {
+        $arrayOne   = ['foo' => 1];
+        $arrayTwo   = ['foo' => 1, 'bar' => 2];
+        $arrayThree = ['foo' => 1, 'bar' => 2, 'baz' => 3];
+
         $validator = new Structure(['foo', 'bar']);
+        $this->assertFalse($validator->validate($this->validator, $arrayOne, Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, $arrayTwo, Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, $arrayThree, Validator::SCENARIO_ALL));
 
-        $this->assertFalse($validator->validate($this->validator, ['foo' => 1], Validator::SCENARIO_ALL));
-        $this->assertTrue($validator->validate($this->validator, ['foo' => 1, 'bar' => 2], Validator::SCENARIO_ALL));
-        $this->assertTrue($validator->validate($this->validator, ['foo' => 1, 'bar' => 2, 'baz' => 3], Validator::SCENARIO_ALL));
-    }
-
-    public function testStrictArrayValidator()
-    {
-        $validator = new Structure(['foo', 'bar'], true);
-
-        $this->assertFalse($validator->validate($this->validator, ['foo' => 1], Validator::SCENARIO_ALL));
-        $this->assertTrue($validator->validate($this->validator, ['foo' => 1, 'bar' => 2], Validator::SCENARIO_ALL));
-        $this->assertFalse($validator->validate($this->validator, ['foo' => 1, 'bar' => 2, 'baz' => 3], Validator::SCENARIO_ALL));
+        $strictValidator = new Structure(['foo', 'bar'], true);
+        $this->assertFalse($strictValidator->validate($this->validator, $arrayOne, Validator::SCENARIO_ALL));
+        $this->assertTrue($strictValidator->validate($this->validator, $arrayTwo, Validator::SCENARIO_ALL));
+        $this->assertFalse($strictValidator->validate($this->validator, $arrayThree, Validator::SCENARIO_ALL));
     }
 
     public function testObjectValidator()
     {
-        $classOne = new \stdClass();
-        $classTwo = new \stdClass();
+        $classOne   = new \stdClass();
+        $classTwo   = new \stdClass();
         $classThree = new \stdClass();
 
         $classOne->foo = 1;
