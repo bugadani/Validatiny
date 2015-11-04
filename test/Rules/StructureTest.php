@@ -22,6 +22,7 @@ class StructureTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Structure(['foo', 'bar']);
 
+        $this->assertFalse($validator->validate($this->validator, ['foo' => 1], Validator::SCENARIO_ALL));
         $this->assertTrue($validator->validate($this->validator, ['foo' => 1, 'bar' => 2], Validator::SCENARIO_ALL));
         $this->assertTrue($validator->validate($this->validator, ['foo' => 1, 'bar' => 2, 'baz' => 3], Validator::SCENARIO_ALL));
     }
@@ -30,6 +31,7 @@ class StructureTest extends \PHPUnit_Framework_TestCase
     {
         $validator = new Structure(['foo', 'bar'], true);
 
+        $this->assertFalse($validator->validate($this->validator, ['foo' => 1], Validator::SCENARIO_ALL));
         $this->assertTrue($validator->validate($this->validator, ['foo' => 1, 'bar' => 2], Validator::SCENARIO_ALL));
         $this->assertFalse($validator->validate($this->validator, ['foo' => 1, 'bar' => 2, 'baz' => 3], Validator::SCENARIO_ALL));
     }
@@ -40,34 +42,42 @@ class StructureTest extends \PHPUnit_Framework_TestCase
 
         $classOne = new \stdClass();
         $classTwo = new \stdClass();
+        $classThree = new \stdClass();
 
         $classOne->foo = 1;
-        $classOne->bar = 2;
 
         $classTwo->foo = 1;
         $classTwo->bar = 2;
-        $classTwo->baz = 3;
 
-        $this->assertTrue($validator->validate($this->validator, $classOne, Validator::SCENARIO_ALL));
+        $classThree->foo = 1;
+        $classThree->bar = 2;
+        $classThree->baz = 3;
+
+        $this->assertFalse($validator->validate($this->validator, $classOne, Validator::SCENARIO_ALL));
         $this->assertTrue($validator->validate($this->validator, $classTwo, Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, $classThree, Validator::SCENARIO_ALL));
     }
 
-    public function testObjectArrayValidator()
+    public function testStrinctObjectValidator()
     {
         $validator = new Structure(['foo', 'bar'], true);
 
         $classOne = new \stdClass();
         $classTwo = new \stdClass();
+        $classThree = new \stdClass();
 
         $classOne->foo = 1;
-        $classOne->bar = 2;
 
         $classTwo->foo = 1;
         $classTwo->bar = 2;
-        $classTwo->baz = 3;
 
-        $this->assertTrue($validator->validate($this->validator, $classOne, Validator::SCENARIO_ALL));
-        $this->assertFalse($validator->validate($this->validator, $classTwo, Validator::SCENARIO_ALL));
+        $classThree->foo = 1;
+        $classThree->bar = 2;
+        $classThree->baz = 3;
+
+        $this->assertFalse($validator->validate($this->validator, $classOne, Validator::SCENARIO_ALL));
+        $this->assertTrue($validator->validate($this->validator, $classTwo, Validator::SCENARIO_ALL));
+        $this->assertFalse($validator->validate($this->validator, $classThree, Validator::SCENARIO_ALL));
     }
 
 }
