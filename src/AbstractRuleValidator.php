@@ -31,9 +31,26 @@ abstract class AbstractRuleValidator extends AbstractValidator
     }
 
     /**
+     * @param Validator $validator
+     * @param           $object
+     * @param           $forScenario
+     *
+     * @return bool
+     */
+    public function validate(Validator $validator, $object, $forScenario)
+    {
+        return $this->validateRules(
+            $this->getApplicableRules($forScenario),
+            $validator,
+            $this->getValue($object),
+            $forScenario
+        );
+    }
+
+    /**
      * @param $forScenario
      *
-     * @return Rule[]
+     * @return \ArrayIterator
      */
     protected function getApplicableRules($forScenario)
     {
@@ -42,6 +59,19 @@ abstract class AbstractRuleValidator extends AbstractValidator
             $rules = array_merge($rules, $this->rules[ $forScenario ]);
         }
 
-        return $rules;
+        return new \ArrayIterator($rules);
     }
+
+    protected function validateRules(\Traversable $rules, Validator $validator, $value, $forScenario)
+    {
+        $valid = true;
+        /** @var AbstractRuleValidator $rule */
+        foreach ($rules as $rule) {
+            $valid = $valid && $rule->validate($validator, $value, $forScenario);
+        }
+
+        return $valid;
+    }
+
+    protected abstract function getValue($object);
 }

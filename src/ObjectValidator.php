@@ -36,27 +36,24 @@ class ObjectValidator extends AbstractRuleValidator
         $this->methodRules[ $method ]->addRule($rule);
     }
 
-    /**
-     * @param Validator $validator
-     * @param           $object
-     * @param           $forScenario
-     *
-     * @return bool
-     */
-    public function validate(Validator $validator, $object, $forScenario)
+    protected function getApplicableRules($forScenario)
     {
-        $valid = true;
+        $rules = new \AppendIterator();
+        $rules->append(new \ArrayIterator($this->propertyRules));
+        $rules->append(new \ArrayIterator($this->methodRules));
+        $rules->append(parent::getApplicableRules($forScenario));
 
-        $iterator = new \AppendIterator();
-        $iterator->append(new \ArrayIterator($this->propertyRules));
-        $iterator->append(new \ArrayIterator($this->methodRules));
-        $iterator->append(new \ArrayIterator($this->getApplicableRules($forScenario)));
+        return $rules;
+    }
 
-        /** @var AbstractRuleValidator $rule */
-        foreach ($iterator as $rule) {
-            $valid = $valid && $rule->validate($validator, $object, $forScenario);
+    protected function getValue($object)
+    {
+        if (!is_object($object)) {
+            throw new \InvalidArgumentException(
+                "\$object is not an object"
+            );
         }
 
-        return $valid;
+        return $object;
     }
 }
