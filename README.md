@@ -21,6 +21,7 @@ Validatiny uses subclasses of Validatiny\Rule to validate objects. The current s
  * Optional - accepts null or validates using an inner rule
  * Pattern - validates a regexp pattern
  * String - validates a string with optional length parameters
+ * Structure - validates that the given object or array has the given fields. This rule has a 'strict' option that requires the validated array or object to only have the specified fields.
  * Union - validates against a list of Rules where at least one of the Rules must apply, useful for collections or optional rules
  * more to come...
 
