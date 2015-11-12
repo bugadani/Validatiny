@@ -23,12 +23,12 @@ class Union extends CompositeRule
      */
     public function validate(Validator $validator, $object, $forScenario)
     {
+        $valid = false;
+
         foreach ($this->rules as $rule) {
-            if ($rule->validate($validator, $object, $forScenario)) {
-                return true;
-            }
+            $valid = $valid || $rule->validate($validator, $object, $forScenario);
         }
 
-        return false;
+        return $valid;
     }
 }

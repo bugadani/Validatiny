@@ -20,6 +20,7 @@ class All extends CompositeRule
     public function validate(Validator $validator, $object, $forScenario)
     {
         $valid = true;
+
         foreach ($this->rules as $rule) {
             $valid = $valid && $rule->validate($validator, $object, $forScenario);
         }

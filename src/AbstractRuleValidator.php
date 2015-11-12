@@ -2,6 +2,8 @@
 
 namespace Validatiny;
 
+use Validatiny\Rules\All;
+
 abstract class AbstractRuleValidator extends AbstractValidator
 {
     /**
@@ -39,8 +41,11 @@ abstract class AbstractRuleValidator extends AbstractValidator
      */
     public function validate(Validator $validator, $object, $forScenario)
     {
-        return $this->validateRules(
-            $this->getApplicableRules($forScenario),
+        $rules = $this->getApplicableRules($forScenario);
+
+        $validationMethod = new All($rules);
+
+        return $validationMethod->validate(
             $validator,
             $this->getValue($object),
             $forScenario
@@ -60,17 +65,6 @@ abstract class AbstractRuleValidator extends AbstractValidator
         }
 
         return new \ArrayIterator($rules);
-    }
-
-    protected function validateRules(\Traversable $rules, Validator $validator, $value, $forScenario)
-    {
-        $valid = true;
-        /** @var AbstractRuleValidator $rule */
-        foreach ($rules as $rule) {
-            $valid = $valid && $rule->validate($validator, $value, $forScenario);
-        }
-
-        return $valid;
     }
 
     protected abstract function getValue($object);
