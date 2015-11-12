@@ -7,22 +7,9 @@ use Validatiny\Validator;
 
 /**
  * @Annotation
- * @Target({'method', 'property', 'annotation', 'class'})
- * @DefaultAttribute rule
- * @Attribute('rule', type: 'Validatiny\Rule')
  */
-class Not extends Rule
+class Not extends DelegateRule
 {
-
-    /**
-     * @var Rule
-     */
-    private $rule;
-
-    public function __construct(Rule $rule)
-    {
-        $this->rule = $rule;
-    }
 
     /**
      * @param Validator $validator
