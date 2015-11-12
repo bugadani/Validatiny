@@ -2,30 +2,16 @@
 
 namespace Validatiny\Rules;
 
-use Validatiny\Rule;
 use Validatiny\Validator;
 
 /**
  * @Annotation
- * @Target({'method', 'property', 'annotation', 'class'})
- * @DefaultAttribute rules
- * @Attribute('rules', type: { 'Validatiny\Rule' }, required: true)
  */
-class All extends Rule
+class All extends CompositeRule
 {
     /**
-     * @var Rule[]
-     */
-    private $rules;
-
-    public function __construct(array $rules)
-    {
-        $this->rules = $rules;
-    }
-
-    /**
      * @param Validator $validator
-     * @param mixed     $object
+     * @param mixed $object
      *
      * @param           $forScenario
      *
@@ -33,12 +19,11 @@ class All extends Rule
      */
     public function validate(Validator $validator, $object, $forScenario)
     {
+        $valid = true;
         foreach ($this->rules as $rule) {
-            if (!$rule->validate($validator, $object, $forScenario)) {
-                return false;
-            }
+            $valid = $valid && $rule->validate($validator, $object, $forScenario);
         }
 
-        return true;
+        return $valid;
     }
 }

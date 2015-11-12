@@ -9,21 +9,9 @@ use Validatiny\Validator;
  * An union of validation rules, one of them must be valid for the rule to be valid
  *
  * @Annotation
- * @Target({'method', 'property', 'annotation', 'class'})
- * @DefaultAttribute rules
- * @Attribute('rules', type: { 'Validatiny\Rule' }, required: true)
  */
-class Union extends Rule
+class Union extends CompositeRule
 {
-    /**
-     * @var Rule[]
-     */
-    private $rules;
-
-    public function __construct(array $rules)
-    {
-        $this->rules = $rules;
-    }
 
     /**
      * @param Validator $validator
