@@ -43,9 +43,4 @@ abstract class CompositeRule extends Rule
 
         $this->rules[] = $rule;
     }
-
-    public function merge(CompositeRule $other)
-    {
-        return new static(array_merge($this->rules, $other->rules));
-    }
 }
