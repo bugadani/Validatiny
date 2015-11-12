@@ -8,6 +8,8 @@ class MethodValidator extends AbstractRuleValidator
 
     public function __construct($method)
     {
+        parent::__construct();
+
         $this->method = $method;
     }
 

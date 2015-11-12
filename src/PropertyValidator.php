@@ -8,6 +8,8 @@ class PropertyValidator extends AbstractRuleValidator
 
     public function __construct($property)
     {
+        parent::__construct();
+
         $this->property = $property;
     }
 

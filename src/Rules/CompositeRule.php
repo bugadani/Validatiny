@@ -2,6 +2,7 @@
 
 namespace Validatiny\Rules;
 
+use Validatiny\AbstractValidator;
 use Validatiny\Rule;
 
 /**
@@ -29,7 +30,9 @@ abstract class CompositeRule extends Rule
     {
         if ($rules instanceof \Traversable) {
             $this->readOnly = true;
-        } else if (!is_array($rules)) {
+        } else if($rules instanceof AbstractValidator) {
+            $rules = [$rules];
+        } if (!is_array($rules)) {
             throw new \InvalidArgumentException('$rules must be an array or a Traversable object');
         }
         $this->rules = $rules;

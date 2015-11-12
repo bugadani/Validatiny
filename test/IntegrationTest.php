@@ -24,8 +24,8 @@ class TestClass
     }
 
     /**
-     * @Validator\Number(min: 10, max: 15)
      * @Validator\Number(min: 10, max: 10, scenario: 'exact')
+     * @Validator\Number(min: 10, max: 15)
      */
     public function method()
     {

@@ -2,23 +2,19 @@
 
 namespace Validatiny;
 
+use Validatiny\Rules\All;
+
 class ObjectValidator extends AbstractRuleValidator
 {
     /**
      * @var PropertyValidator[]
      */
-    private $propertyRules;
+    private $propertyRules = [];
 
     /**
      * @var MethodValidator[]
      */
-    private $methodRules;
-
-    public function __construct()
-    {
-        $this->propertyRules = [];
-        $this->methodRules   = [];
-    }
+    private $methodRules = [];
 
     public function addPropertyRule($property, Rule $rule)
     {
@@ -38,12 +34,11 @@ class ObjectValidator extends AbstractRuleValidator
 
     protected function getApplicableRules($forScenario)
     {
-        $rules = new \AppendIterator();
-        $rules->append(new \ArrayIterator($this->propertyRules));
-        $rules->append(new \ArrayIterator($this->methodRules));
-        $rules->append(parent::getApplicableRules($forScenario));
-
-        return $rules;
+        return new All([
+            new All($this->propertyRules),
+            new All($this->methodRules),
+            parent::getApplicableRules($forScenario),
+        ]);
     }
 
     protected function getValue($object)

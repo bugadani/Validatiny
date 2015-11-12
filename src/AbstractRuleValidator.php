@@ -3,20 +3,27 @@
 namespace Validatiny;
 
 use Validatiny\Rules\All;
+use Validatiny\Rules\CompositeRule;
 
 abstract class AbstractRuleValidator extends AbstractValidator
 {
     /**
-     * @var Rule[][]
+     * @var CompositeRule[]
      */
-    private $rules = ['all' => []];
+    private $rules = [];
+
+    public function __construct()
+    {
+        $this->rules['all'] = new All();
+    }
 
     private function addRuleForScenario(Rule $rule, $scenario)
     {
         if (!isset($this->rules[ $scenario ])) {
-            $this->rules[ $scenario ] = [];
+            //Pass 'all' so that we won't have to merge them when used
+            $this->rules[ $scenario ] = new All($this->rules['all']);
         }
-        $this->rules[ $scenario ][] = $rule;
+        $this->rules[ $scenario ]->addRule($rule);
     }
 
     public function addRule(Rule $rule)
@@ -43,9 +50,7 @@ abstract class AbstractRuleValidator extends AbstractValidator
     {
         $rules = $this->getApplicableRules($forScenario);
 
-        $validationMethod = new All($rules);
-
-        return $validationMethod->validate(
+        return $rules->validate(
             $validator,
             $this->getValue($object),
             $forScenario
@@ -55,17 +60,18 @@ abstract class AbstractRuleValidator extends AbstractValidator
     /**
      * @param $forScenario
      *
-     * @return \ArrayIterator
+     * @return CompositeRule
      */
     protected function getApplicableRules($forScenario)
     {
-        $rules = $this->rules['all'];
-        if ($forScenario !== 'all' && isset($this->rules[ $forScenario ])) {
-            $rules = array_merge($rules, $this->rules[ $forScenario ]);
+        if (!isset($this->rules[ $forScenario ])) {
+            //fall back to 'all'
+            $forScenario = 'all';
         }
 
-        return new \ArrayIterator($rules);
+        return $this->rules[ $forScenario ];
     }
 
     protected abstract function getValue($object);
+
 }
