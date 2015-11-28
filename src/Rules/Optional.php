@@ -21,7 +21,7 @@ class Optional extends DelegateRule
      */
     public function validate(Validator $validator, $object, $forScenario)
     {
-        if ($object === null) {
+        if ($object === null || $object === '') {
             return true;
         }
 
