@@ -1,10 +1,13 @@
 <?php
 
-namespace Validatiny;
+namespace Validatiny\Test;
 
+use Validatiny\ObjectValidator;
+use Validatiny\RuleReader;
 use Validatiny\Rules\BooleanRule;
 use Validatiny\Rules\Number;
 use Validatiny\Rules\StringRule;
+use Validatiny\Validator;
 
 class ValidatorTest extends \PHPUnit_Framework_TestCase
 {
@@ -12,8 +15,8 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $std = new \stdClass();
 
-        $mockValidator = $this->getMock(__NAMESPACE__ . '\ObjectValidator', ['validate']);
-        $mockReader    = $this->getMock(__NAMESPACE__ . '\RuleReader', ['getObjectValidator']);
+        $mockValidator = $this->getMock(ObjectValidator::class, ['validate']);
+        $mockReader    = $this->getMock(RuleReader::class, ['getObjectValidator']);
 
         $validator = new Validator($mockReader);
 
@@ -36,7 +39,7 @@ class ValidatorTest extends \PHPUnit_Framework_TestCase
         $std->prop  = "foo";
         $std->other  = "foo";
 
-        $mockReader = $this->getMock(__NAMESPACE__ . '\RuleReader', ['getObjectValidator']);
+        $mockReader = $this->getMock(RuleReader::class, ['getObjectValidator']);
 
         $validator = new Validator($mockReader);
 

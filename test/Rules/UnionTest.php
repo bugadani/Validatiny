@@ -1,6 +1,6 @@
 <?php
 
-namespace Validatiny\Rules;
+namespace Validatiny\Test\Rules;
 
 use Validatiny\Readers\AnnotationReader;
 use Validatiny\Validator;
@@ -8,7 +8,10 @@ use Validatiny\Validator;
 class UnionTestClass {
 
     /**
-     * @Union({@StringRule(), @Number(min: 2, max: 3)})
+     * @Validatiny\Rules\Union({
+     *     @Validatiny\Rules\StringRule(),
+     *     @Validatiny\Rules\Number(min: 2, max: 3)
+     * })
      */
     public $value;
 

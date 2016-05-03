@@ -1,6 +1,6 @@
 <?php
 
-namespace Validatiny;
+namespace Validatiny\Test;
 
 use Validatiny\Readers\AnnotationReader;
 use Validatiny\Rules as Validator;

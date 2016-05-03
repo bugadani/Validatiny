@@ -1,8 +1,9 @@
 <?php
 
-namespace Validatiny\Rules;
+namespace Validatiny\Test\Rules;
 
 use Validatiny\Readers\AnnotationReader;
+use Validatiny\Rules\Pattern;
 use Validatiny\Validator;
 
 class PatternTest extends \PHPUnit_Framework_TestCase

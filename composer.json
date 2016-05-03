@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "library",
   "require": {
-    "php": ">=5.4",
+    "php": ">=5.5",
     "bugadani/annotiny": "dev-master"
   },
   "authors": [
@@ -17,6 +17,11 @@
   "autoload": {
     "psr-4": {
       "Validatiny\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Validatiny\\Test\\": "test/"
     }
   }
 }

@@ -1,8 +1,9 @@
 <?php
 
-namespace Validatiny\Rules;
+namespace Validatiny\Test\Rules;
 
 use Validatiny\Readers\AnnotationReader;
+use Validatiny\Rules\Object;
 use Validatiny\Validator;
 
 class TestClass
@@ -33,7 +34,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testObjectTypeValidatorWithoutValidatingTheObject()
     {
-        $validator = new Object(__NAMESPACE__ . '\TestClass', false);
+        $validator = new Object(TestClass::class, false);
 
         $this->assertFalse($validator->validate($this->validator, "asd", Validator::SCENARIO_ALL));
         $this->assertTrue($validator->validate($this->validator, new TestClass(), Validator::SCENARIO_ALL));
@@ -41,7 +42,7 @@ class ObjectTest extends \PHPUnit_Framework_TestCase
 
     public function testObjectValidator()
     {
-        $validator = new Object(__NAMESPACE__ . '\TestClass');
+        $validator = new Object(TestClass::class);
 
         $this->assertFalse($validator->validate($this->validator, new TestClass(), Validator::SCENARIO_ALL));
         $this->assertTrue($validator->validate($this->validator, new TestClass('abcde'), Validator::SCENARIO_ALL));

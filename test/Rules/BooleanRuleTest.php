@@ -1,8 +1,9 @@
 <?php
 
-namespace Validatiny\Rules;
+namespace Validatiny\Test\Rules;
 
 use Validatiny\Readers\AnnotationReader;
+use Validatiny\Rules\BooleanRule;
 use Validatiny\Validator;
 
 class BooleanRuleTest extends \PHPUnit_Framework_TestCase

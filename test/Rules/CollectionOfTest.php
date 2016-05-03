@@ -1,8 +1,10 @@
 <?php
 
-namespace Validatiny\Rules;
+namespace Validatiny\Test\Rules;
 
 use Validatiny\Readers\AnnotationReader;
+use Validatiny\Rules\CollectionOf;
+use Validatiny\Rules\Number;
 use Validatiny\Validator;
 
 class CollectionOfTest extends \PHPUnit_Framework_TestCase

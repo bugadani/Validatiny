@@ -1,8 +1,10 @@
 <?php
 
-namespace Validatiny\Rules;
+namespace Validatiny\Test\Rules;
 
 use Validatiny\Readers\AnnotationReader;
+use Validatiny\Rules\Optional;
+use Validatiny\Rules\StringRule;
 use Validatiny\Validator;
 
 class OptionalTest extends \PHPUnit_Framework_TestCase

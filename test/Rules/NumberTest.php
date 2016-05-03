@@ -1,8 +1,9 @@
 <?php
 
-namespace Validatiny\Rules;
+namespace Validatiny\Test\Rules;
 
 use Validatiny\Readers\AnnotationReader;
+use Validatiny\Rules\Number;
 use Validatiny\Validator;
 
 class NumberTest extends \PHPUnit_Framework_TestCase

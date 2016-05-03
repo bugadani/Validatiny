@@ -1,6 +1,6 @@
 <?php
 
-namespace Validatiny\Rules;
+namespace Validatiny\Test\Rules;
 
 use Validatiny\Readers\AnnotationReader;
 use Validatiny\Validator;
@@ -8,9 +8,9 @@ use Validatiny\Validator;
 class AllTestClass {
 
     /**
-     * @All({
-     *  @StringRule(minLength: 2, maxLength: 5),
-     *  @Enum({"foo", "foobar"})
+     * @Validatiny\Rules\All({
+     *  @Validatiny\Rules\StringRule(minLength: 2, maxLength: 5),
+     *  @Validatiny\Rules\Enum({"foo", "foobar"})
      * })
      */
     public $value;
