@@ -2,19 +2,28 @@
 
 namespace Validatiny;
 
+use Validatiny\Rules\All;
+use Validatiny\Rules\CompositeRule;
+
 abstract class AbstractRuleValidator extends AbstractValidator
 {
     /**
-     * @var Rule[][]
+     * @var CompositeRule[]
      */
-    private $rules = ['all' => []];
+    private $rules = [];
+
+    public function __construct()
+    {
+        $this->rules['all'] = new All();
+    }
 
     private function addRuleForScenario(Rule $rule, $scenario)
     {
         if (!isset($this->rules[ $scenario ])) {
-            $this->rules[ $scenario ] = [];
+            //Pass 'all' so that we won't have to merge them when used
+            $this->rules[ $scenario ] = new All($this->rules['all']);
         }
-        $this->rules[ $scenario ][] = $rule;
+        $this->rules[ $scenario ]->addRule($rule);
     }
 
     public function addRule(Rule $rule)
@@ -31,17 +40,38 @@ abstract class AbstractRuleValidator extends AbstractValidator
     }
 
     /**
+     * @param Validator $validator
+     * @param           $object
+     * @param           $forScenario
+     *
+     * @return bool
+     */
+    public function validate(Validator $validator, $object, $forScenario)
+    {
+        $rules = $this->getApplicableRules($forScenario);
+
+        return $rules->validate(
+            $validator,
+            $this->getValue($object),
+            $forScenario
+        );
+    }
+
+    /**
      * @param $forScenario
      *
-     * @return Rule[]
+     * @return CompositeRule
      */
     protected function getApplicableRules($forScenario)
     {
-        $rules = $this->rules[ Validator::SCENARIO_ALL ];
-        if ($forScenario !== Validator::SCENARIO_ALL && isset($this->rules[ $forScenario ])) {
-            $rules = array_merge($rules, $this->rules[ $forScenario ]);
+        if (!isset($this->rules[ $forScenario ])) {
+            //fall back to 'all'
+            $forScenario =  Validator::SCENARIO_ALL;
         }
 
-        return $rules;
+        return $this->rules[ $forScenario ];
     }
+
+    protected abstract function getValue($object);
+
 }

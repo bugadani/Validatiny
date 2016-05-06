@@ -2,23 +2,19 @@
 
 namespace Validatiny;
 
+use Validatiny\Rules\All;
+
 class ObjectValidator extends AbstractRuleValidator
 {
     /**
      * @var PropertyValidator[]
      */
-    private $propertyRules;
+    private $propertyRules = [];
 
     /**
      * @var MethodValidator[]
      */
-    private $methodRules;
-
-    public function __construct()
-    {
-        $this->propertyRules = [];
-        $this->methodRules   = [];
-    }
+    private $methodRules = [];
 
     public function addPropertyRule($property, Rule $rule)
     {
@@ -36,27 +32,23 @@ class ObjectValidator extends AbstractRuleValidator
         $this->methodRules[ $method ]->addRule($rule);
     }
 
-    /**
-     * @param Validator $validator
-     * @param           $object
-     * @param           $forScenario
-     *
-     * @return bool
-     */
-    public function validate(Validator $validator, $object, $forScenario)
+    protected function getApplicableRules($forScenario)
     {
-        $valid = true;
+        return new All([
+            new All($this->propertyRules),
+            new All($this->methodRules),
+            parent::getApplicableRules($forScenario),
+        ]);
+    }
 
-        $iterator = new \AppendIterator();
-        $iterator->append(new \ArrayIterator($this->propertyRules));
-        $iterator->append(new \ArrayIterator($this->methodRules));
-        $iterator->append(new \ArrayIterator($this->getApplicableRules($forScenario)));
-
-        /** @var AbstractRuleValidator $rule */
-        foreach ($iterator as $rule) {
-            $valid = $valid && $rule->validate($validator, $object, $forScenario);
+    protected function getValue($object)
+    {
+        if (!is_object($object)) {
+            throw new \InvalidArgumentException(
+                "\$object is not an object"
+            );
         }
 
-        return $valid;
+        return $object;
     }
 }

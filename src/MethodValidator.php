@@ -8,10 +8,16 @@ class MethodValidator extends AbstractRuleValidator
 
     public function __construct($method)
     {
+        parent::__construct();
+
         $this->method = $method;
     }
 
-    public function validate(Validator $validator, $object, $forScenario)
+    /**
+     * @param $object
+     * @return mixed
+     */
+    protected function getValue($object)
     {
         if (!is_callable([$object, $this->method])) {
             throw new \InvalidArgumentException(
@@ -20,12 +26,6 @@ class MethodValidator extends AbstractRuleValidator
         }
         $value = $object->{$this->method}();
 
-        return array_reduce(
-            $this->getApplicableRules($forScenario),
-            function ($carry, Rule $rule) use ($validator, $value, $forScenario) {
-                return $carry && $rule->validate($validator, $value, $forScenario);
-            },
-            true
-        );
+        return $value;
     }
 }

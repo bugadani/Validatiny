@@ -2,30 +2,16 @@
 
 namespace Validatiny\Rules;
 
-use Validatiny\Rule;
 use Validatiny\Validator;
 
 /**
  * @Annotation
- * @Target({'method', 'property', 'annotation'})
- * @DefaultAttribute rule
- * @Attribute('rule', type: 'Validatiny\Rule', required: true)
  */
-class CollectionOf extends Rule
+class CollectionOf extends DelegateRule
 {
     /**
-     * @var Rule
-     */
-    private $rule;
-
-    public function __construct(Rule $rule)
-    {
-        $this->rule = $rule;
-    }
-
-    /**
      * @param Validator $validator
-     * @param mixed     $object
+     * @param mixed $object
      *
      * @param           $forScenario
      *
@@ -33,15 +19,15 @@ class CollectionOf extends Rule
      */
     public function validate(Validator $validator, $object, $forScenario)
     {
-        if(!is_array($object) && !$object instanceof \Traversable) {
+        if (!is_array($object) && !$object instanceof \Traversable) {
             return false;
         }
+        $valid = true;
+
         foreach ($object as $v) {
-            if (!$this->rule->validate($validator, $v, $forScenario)) {
-                return false;
-            }
+            $valid = $valid && $this->rule->validate($validator, $v, $forScenario);
         }
 
-        return true;
+        return $valid;
     }
 }

@@ -20,13 +20,10 @@ abstract class Rule extends AbstractValidator
             if (!is_array($scenario)) {
                 $allStrings = false;
             } else {
-                $allStrings = array_reduce(
-                    $scenario,
-                    function ($carry, $item) {
-                        return $carry && is_string($item);
-                    },
-                    true
-                );
+                $allStrings = true;
+                foreach ($scenario as $s) {
+                    $allStrings = $allStrings && is_string($s);
+                }
             }
 
             if (!$allStrings) {
