@@ -14,14 +14,14 @@ abstract class AbstractRuleValidator extends AbstractValidator
 
     public function __construct()
     {
-        $this->rules['all'] = new All();
+        $this->rules[ Validator::SCENARIO_ALL ] = new All();
     }
 
     private function addRuleForScenario(Rule $rule, $scenario)
     {
         if (!isset($this->rules[ $scenario ])) {
             //Pass 'all' so that we won't have to merge them when used
-            $this->rules[ $scenario ] = new All($this->rules['all']);
+            $this->rules[ $scenario ] = new All($this->rules[ Validator::SCENARIO_ALL ]);
         }
         $this->rules[ $scenario ]->addRule($rule);
     }
@@ -66,7 +66,7 @@ abstract class AbstractRuleValidator extends AbstractValidator
     {
         if (!isset($this->rules[ $forScenario ])) {
             //fall back to 'all'
-            $forScenario =  Validator::SCENARIO_ALL;
+            $forScenario = Validator::SCENARIO_ALL;
         }
 
         return $this->rules[ $forScenario ];

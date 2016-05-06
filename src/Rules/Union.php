@@ -15,7 +15,7 @@ class Union extends CompositeRule
 
     /**
      * @param Validator $validator
-     * @param mixed     $object
+     * @param mixed $object
      *
      * @param           $forScenario
      *
@@ -23,12 +23,12 @@ class Union extends CompositeRule
      */
     public function validate(Validator $validator, $object, $forScenario)
     {
-        $valid = false;
-
         foreach ($this->rules as $rule) {
-            $valid = $valid || $rule->validate($validator, $object, $forScenario);
+            if ($rule->validate($validator, $object, $forScenario)) {
+                return true;
+            }
         }
 
-        return $valid;
+        return false;
     }
 }

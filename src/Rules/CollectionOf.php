@@ -13,7 +13,7 @@ class CollectionOf extends DelegateRule
      * @param Validator $validator
      * @param mixed $object
      *
-     * @param           $forScenario
+     * @param $forScenario
      *
      * @return bool
      */
@@ -22,12 +22,13 @@ class CollectionOf extends DelegateRule
         if (!is_array($object) && !$object instanceof \Traversable) {
             return false;
         }
-        $valid = true;
 
         foreach ($object as $v) {
-            $valid = $valid && $this->rule->validate($validator, $v, $forScenario);
+            if(!$this->rule->validate($validator, $v, $forScenario)) {
+                return false;
+            }
         }
 
-        return $valid;
+        return true;
     }
 }
