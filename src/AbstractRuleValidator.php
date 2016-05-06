@@ -37,8 +37,8 @@ abstract class AbstractRuleValidator extends AbstractValidator
      */
     protected function getApplicableRules($forScenario)
     {
-        $rules = $this->rules['all'];
-        if ($forScenario !== 'all' && isset($this->rules[ $forScenario ])) {
+        $rules = $this->rules[ Validator::SCENARIO_ALL ];
+        if ($forScenario !== Validator::SCENARIO_ALL && isset($this->rules[ $forScenario ])) {
             $rules = array_merge($rules, $this->rules[ $forScenario ]);
         }
 
